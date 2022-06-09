@@ -147,9 +147,19 @@ describe('Creating application', () => {
     cy.get('[data-test-subj="createButton"]', {
       timeout: TIMEOUT_DELAY,
     }).should('not.be.disabled');
+    cy.route2('POST', '/api/observability/application/').as(
+      'addApplication'
+    );
+    cy.route2('POST', 'panels').as('addPanels');
+    cy.route2('PUT', '/api/observability/application/').as('putApplication');
+    cy.route2('POST', 'query').as('postQuery');
     cy.get('[data-test-subj="createButton"]', {
       timeout: TIMEOUT_DELAY,
     }).click();
+    cy.wait('@addApplication');
+    cy.wait('@addPanels');
+    cy.wait('@putApplication');
+    cy.wait('@postQuery');
     cy.get('[data-test-subj="applicationTitle"]', {
       timeout: TIMEOUT_DELAY,
     }).should('contain', nameOne);
