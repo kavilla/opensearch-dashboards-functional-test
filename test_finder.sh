@@ -13,7 +13,7 @@ OSD_PLUGIN_TEST_PATH='cypress/integration/plugins'
 # If the build manifest exists in the expected path then we can read the components to execute component tests if the
 # component exists. If the build manifest does not exist then we can just use a default list of tests.
 function get_test_list() {
-    [ -f $OSD_MANIFEST_PATH ] && generate_test_list_from_build_manifest || generate_test_list
+    [ -f $OSD_BUILD_MANIFEST ] && generate_test_list_from_build_manifest || generate_test_list
 }
 
 function generate_test_list() {
@@ -33,14 +33,14 @@ function generate_test_list() {
 function generate_test_list_from_build_manifest() {
     MANIFEST_TEST_FILES="$OSD_TEST_PATH/opensearch-dashboards/*.js"
 
-    grep -q 'alertingDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/alerting-dashboards-plugin/*" || true
-    grep -q 'anomalyDetectionDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/anomaly-detection-dashboards-plugin/*" || true
-    grep -q 'ganttChartDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/gantt-chart-dashboards/*" || true
-    grep -q 'indexManagementDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/index-management-dashboards-plugin/*" || true
+    # grep -q 'alertingDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/alerting-dashboards-plugin/*" || true
+    # grep -q 'anomalyDetectionDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/anomaly-detection-dashboards-plugin/*" || true
+    # grep -q 'ganttChartDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/gantt-chart-dashboards/*" || true
+    # grep -q 'indexManagementDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/index-management-dashboards-plugin/*" || true
     grep -q 'observabilityDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/observability-dashboards/*" || true
-    grep -q 'queryWorkbenchDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/query-workbench-dashboards/*" || true
-    grep -q 'reportsDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/reports-dashboards/*" || true
-    grep -q 'securityDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/security/*" || true
+    # grep -q 'queryWorkbenchDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/query-workbench-dashboards/*" || true
+    # grep -q 'reportsDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/reports-dashboards/*" || true
+    # grep -q 'securityDashboards' $OSD_BUILD_MANIFEST && MANIFEST_TEST_FILES+=",$OSD_PLUGIN_TEST_PATH/security/*" || true
 
     echo "$MANIFEST_TEST_FILES"
 }
