@@ -147,12 +147,12 @@ describe('Creating application', () => {
     cy.get('[data-test-subj="createButton"]', {
       timeout: TIMEOUT_DELAY,
     }).should('not.be.disabled');
-    cy.intercept('POST', '/api/observability/application/').as(
+    cy.route2('POST', '/api/observability/application/').as(
       'addApplication'
     );
-    cy.intercept('POST', 'panels').as('addPanels');
-    cy.intercept('PUT', '/api/observability/application/').as('putApplication');
-    cy.intercept('POST', 'query').as('postQuery');
+    cy.route2('POST', 'panels').as('addPanels');
+    cy.route2('PUT', '/api/observability/application/').as('putApplication');
+    cy.route2('POST', 'query').as('postQuery');
     cy.get('[data-test-subj="createButton"]', {
       timeout: TIMEOUT_DELAY,
     }).click();
@@ -173,9 +173,9 @@ describe('Creating application', () => {
 });
 
 describe('Viewing application', () => {
-  beforeEach(() => {
+  before(() => {
     moveToApplication(nameOne);
-  })
+  });
 
   it('Saves visualization #1 to panel', () => {
     cy.get('[data-test-subj="app-analytics-panelTab"]', {
@@ -301,6 +301,12 @@ describe('Viewing application', () => {
   });
 
   it('Saves visualization #2 to panel with availability level', () => {
+    cy.get(`[data-test-subj="${nameOne}ApplicationLink"]`, {
+      timeout: TIMEOUT_DELAY,
+    }).click();
+    cy.get('[data-test-subj="applicationTitle"]', {
+      timeout: TIMEOUT_DELAY,
+    }).should('contain', nameOne);
     changeTimeTo24('months');
     cy.get('[data-test-subj="app-analytics-logTab"]', {
       timeout: TIMEOUT_DELAY,
@@ -405,6 +411,12 @@ describe('Viewing application', () => {
   });
 
   it('Changes availability visualization', () => {
+    cy.get(`[data-test-subj="${nameOne}ApplicationLink"]`, {
+      timeout: TIMEOUT_DELAY,
+    }).click();
+    cy.get('[data-test-subj="applicationTitle"]', {
+      timeout: TIMEOUT_DELAY,
+    }).should('contain', nameOne);
     cy.get('[data-test-subj="app-analytics-configTab"]', {
       timeout: TIMEOUT_DELAY,
     }).click();
@@ -415,7 +427,12 @@ describe('Viewing application', () => {
     cy.get(
       '[data-test-subj="AvailableAvailabilityBadge"][style="background-color: rgb(84, 179, 153); color: rgb(0, 0, 0);"]'
     ).should('contain', 'Available');
-    moveToApplication(nameOne);
+    cy.get(`[data-test-subj="${nameOne}ApplicationLink"]`, {
+      timeout: TIMEOUT_DELAY,
+    }).click();
+    cy.get('[data-test-subj="applicationTitle"]', {
+      timeout: TIMEOUT_DELAY,
+    }).should('contain', nameOne);
     cy.get('[data-test-subj="app-analytics-configTab"]', {
       timeout: TIMEOUT_DELAY,
     }).click();
