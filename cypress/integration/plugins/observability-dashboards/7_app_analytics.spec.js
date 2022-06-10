@@ -185,15 +185,16 @@ describe('Viewing application', () => {
       timeout: TIMEOUT_DELAY,
     })
       .first()
-      .click();
+      .click({ force: true });
     cy.wait(delayTime);
     cy.get('[id="explorerPlotComponent"]', { timeout: TIMEOUT_DELAY }).should(
       'exist'
     );
     cy.get('[data-test-subj="searchAutocompleteTextArea"]', {
       timeout: TIMEOUT_DELAY,
-    }).click();
-    cy.get('.aa-List').find('.aa-Item').should('have.length', 11);
+    })
+      .click({ force: true });
+    cy.get('.aa-List', { timeout: TIMEOUT_DELAY }).find('.aa-Item').should('have.length', 11);
     cy.get('[data-test-subj="searchAutocompleteTextArea"]', {
       timeout: TIMEOUT_DELAY,
     })
@@ -203,15 +204,15 @@ describe('Viewing application', () => {
     cy.wait(delayTime * 2);
     cy.get('[data-test-subj="main-content-visTab"]', {
       timeout: TIMEOUT_DELAY,
-    }).click();
+    }).click({ force: true });
     supressResizeObserverIssue();
     cy.get('[data-test-subj="eventExplorer__saveManagementPopover"]', {
       timeout: TIMEOUT_DELAY,
-    }).click();
+    }).click({ force: true });
     cy.get('[data-test-subj="eventExplorer__querySaveName"]', {
       timeout: TIMEOUT_DELAY,
     })
-      .click()
+      .click({ force: true })
       .type(visOneName);
     cy.wait(delayTime);
     cy.get('[data-test-subj="eventExplorer__querySaveConfirm"]', {
