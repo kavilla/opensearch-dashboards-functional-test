@@ -467,6 +467,7 @@ describe('Application Analytics home page', () => {
       .within(() => {
         cy.get('.euiCheckbox').click();
       });
+    cy.wait(delayTime);
     cy.get('[data-test-subj="appAnalyticsActionsButton"]', {
       timeout: TIMEOUT_DELAY,
     }).click();
