@@ -159,11 +159,11 @@ describe('Viewing application', () => {
     cy.wait(delayTime);
     cy.get('[data-test-subj="eventExplorer__querySaveConfirm"]', {
       timeout: TIMEOUT_DELAY,
-    }).click();
+    }).click({ force: true });
     cy.wait(delayTime * 2);
     cy.get('[data-test-subj="app-analytics-panelTab"]', {
       timeout: TIMEOUT_DELAY,
-    }).click();
+    }).click({ force: true });
     cy.get('[data-test-subj="Flights to VeniceVisualizationPanel"]', {
       timeout: TIMEOUT_DELAY,
     }).should('exist');
