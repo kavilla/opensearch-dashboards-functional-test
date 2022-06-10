@@ -167,10 +167,6 @@ describe('Viewing application', () => {
     cy.get('[data-test-subj="Flights to VeniceVisualizationPanel"]', {
       timeout: TIMEOUT_DELAY,
     }).should('exist');
-    cy.get('[id="explorerPlotComponent"]', { timeout: TIMEOUT_DELAY }).should(
-      'exist'
-    );
-    cy.get('[class="trace bars"]', { timeout: TIMEOUT_DELAY }).should('exist');
   });
 
   it('Adds availability level to visualization #1', () => {
@@ -512,18 +508,19 @@ describe('Application Analytics home page', () => {
       .within(() => {
         cy.get('.euiCheckbox').click();
       });
+    cy.wait(delayTime);
     cy.get('[data-test-subj="appAnalyticsActionsButton"]', {
-      timeout: delayTime * 4,
+      timeout: TIMEOUT_DELAY,
     }).click();
     cy.get('[data-test-subj="deleteApplicationContextMenuItem"]', {
-      timeout: delayTime,
+      timeout: TIMEOUT_DELAY,
     }).click();
     cy.get('[data-test-subj="popoverModal__deleteTextInput"').type('delete');
     cy.get('[data-test-subj="popoverModal__deleteButton"]', {
-      timeout: delayTime,
+      timeout: TIMEOUT_DELAY,
     }).click();
     cy.get(`[data-test-subj="${newName}ApplicationLink"]`, {
-      timeout: delayTime,
+      timeout: TIMEOUT_DELAY,
     }).should('not.exist');
   });
 });
