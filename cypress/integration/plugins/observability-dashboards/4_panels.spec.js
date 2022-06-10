@@ -39,16 +39,6 @@ const moveToTestPanel = () => {
   cy.wait(panelDelay);
 };
 
-describe('Adding sample data and visualization', () => {
-  it('Adds sample flights data for visualization paragraph', () => {
-    cy.visit(`${BASE_PATH}/app/home#/tutorial_directory/sampleData`);
-    cy.get('div[data-test-subj="sampleDataSetCardflights"]')
-      .contains(/(Add|View) data/)
-      .click();
-    cy.wait(panelDelay * 3);
-  });
-});
-
 describe('Creating visualizations', () => {
   beforeEach(() => {
     moveToEventsHome();

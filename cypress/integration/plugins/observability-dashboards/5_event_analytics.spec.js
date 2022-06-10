@@ -43,16 +43,6 @@ const querySearch = (query) => {
   cy.get('[data-test-subj="superDatePickerApplyTimeButton"]').contains('Refresh').click();
 };
 
-describe('Adding sample data and visualization', () => {
-  it('Adds sample flights data for event analytics', () => {
-    cy.visit(`${BASE_PATH}/app/home#/tutorial_directory/sampleData`);
-    cy.get('div[data-test-subj="sampleDataSetCardflights"]')
-      .contains(/(Add|View) data/)
-      .click();
-    cy.wait(delayTime);
-  });
-});
-
 describe('Search a query on event home', () => {
   it('Search a query and redirect to explorer to display result data', () => {
     landOnEventHome();
