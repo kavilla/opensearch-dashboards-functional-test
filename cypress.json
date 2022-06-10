@@ -10,8 +10,8 @@
   "viewportWidth": 2000,
   "viewportHeight": 1320,
   "env": {
-    "openSearchUrl": "https://localhost:9200",
-    "SECURITY_ENABLED": true,
+    "openSearchUrl": "http://localhost:9200",
+    "SECURITY_ENABLED": false,
     "username": "admin",
     "password": "admin",
     "ENDPOINT_WITH_PROXY": false,
