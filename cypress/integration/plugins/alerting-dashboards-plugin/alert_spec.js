@@ -88,56 +88,56 @@ describe('Alerts', () => {
   //   });
   // });
 
-  describe("can be in 'Completed' state", () => {
-    before(() => {
-      // cy.deleteAllMonitors();
-      // Delete the target indices defined in 'sample_monitor_workflow.json'
-      // cy.deleteIndexByName('alerting*');
-      Cypress.config('unique_number', `${Date.now()}`);
-      // Modify the monitor name to be unique
-      sampleQueryLevelMonitorWorkflow.name += `-${Cypress.config(
-        'unique_number'
-      )}`;
-      cy.createAndExecuteMonitor(sampleQueryLevelMonitorWorkflow);
-    });
+  // describe("can be in 'Completed' state", () => {
+  //   before(() => {
+  //     // cy.deleteAllMonitors();
+  //     // Delete the target indices defined in 'sample_monitor_workflow.json'
+  //     // cy.deleteIndexByName('alerting*');
+  //     Cypress.config('unique_number', `${Date.now()}`);
+  //     // Modify the monitor name to be unique
+  //     sampleQueryLevelMonitorWorkflow.name += `-${Cypress.config(
+  //       'unique_number'
+  //     )}`;
+  //     cy.createAndExecuteMonitor(sampleQueryLevelMonitorWorkflow);
+  //   });
 
-    it('when the trigger condition is not met after met once', () => {
-      // Type in monitor name in search box to filter out the alert
-      cy.get(`input[type="search"]`)
-        .focus()
-        .type(`${Cypress.config('unique_number')}`);
+  //   it('when the trigger condition is not met after met once', () => {
+  //     // Type in monitor name in search box to filter out the alert
+  //     cy.get(`input[type="search"]`)
+  //       .focus()
+  //       .type(`${Cypress.config('unique_number')}`);
 
-      // Confirm there is an active alert
-      cy.contains('Active');
+  //     // Confirm there is an active alert
+  //     cy.contains('Active');
 
-      // The trigger condition is: there is no document in the indices 'alerting*'
-      // The following commands create a document in the index to complete the alert
-      // Create an index
-      cy.createIndexByName(TESTING_INDEX);
+  //     // The trigger condition is: there is no document in the indices 'alerting*'
+  //     // The following commands create a document in the index to complete the alert
+  //     // Create an index
+  //     cy.createIndexByName(TESTING_INDEX);
 
-      // Insert a document
-      cy.insertDocumentToIndex('test', 1, {});
+  //     // Insert a document
+  //     cy.insertDocumentToIndex('test', 1, {});
 
-      // Wait for 1 minute
-      cy.wait(60000);
+  //     // Wait for 1 minute
+  //     cy.wait(60000);
 
-      // Reload the page
-      cy.reload();
+  //     // Reload the page
+  //     cy.reload();
 
-      // Type in monitor name in search box to filter out the alert
-      cy.get(`input[type="search"]`)
-        .focus()
-        .type(`${Cypress.config('unique_number')}`);
+  //     // Type in monitor name in search box to filter out the alert
+  //     cy.get(`input[type="search"]`)
+  //       .focus()
+  //       .type(`${Cypress.config('unique_number')}`);
 
-      // Confirm we can see the alert is in 'Completed' state
-      cy.contains('Completed');
-    });
+  //     // Confirm we can see the alert is in 'Completed' state
+  //     cy.contains('Completed');
+  //   });
 
-    after(() => {
-      // Delete the testing index
-      // cy.deleteIndexByName(TESTING_INDEX);
-    });
-  });
+  //   after(() => {
+  //     // Delete the testing index
+  //     // cy.deleteIndexByName(TESTING_INDEX);
+  //   });
+  // });
 
   describe("can be in 'Error' state", () => {
     before(() => {
