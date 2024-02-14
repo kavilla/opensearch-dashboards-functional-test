@@ -199,7 +199,7 @@ describe('Alerts', () => {
     //   // Confirm we can see the alert is in 'Deleted' state
     //   cy.contains('Deleted');
     // });
-  });
+  // });
 
   after(() => {
     // Delete all existing monitors
