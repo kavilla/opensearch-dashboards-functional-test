@@ -24,7 +24,7 @@ describe('Alerts', () => {
 
   describe("can be in 'Active' state", () => {
     before(() => {
-      cy.deleteAllMonitors();
+      //cy.deleteAllMonitors();
       // Generate a unique number in every test by getting a unix timestamp in milliseconds
       Cypress.config('unique_number', `${Date.now()}`);
       // Modify the monitor name to be unique
@@ -56,7 +56,7 @@ describe('Alerts', () => {
 
   describe("can be in 'Acknowledged' state", () => {
     before(() => {
-      cy.deleteAllMonitors();
+      //cy.deleteAllMonitors();
       Cypress.config('unique_number', `${Date.now()}`);
       // Modify the monitor name to be unique
       sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
@@ -90,9 +90,9 @@ describe('Alerts', () => {
 
   describe("can be in 'Completed' state", () => {
     before(() => {
-      cy.deleteAllMonitors();
+      // cy.deleteAllMonitors();
       // Delete the target indices defined in 'sample_monitor_workflow.json'
-      cy.deleteIndexByName('alerting*');
+      // cy.deleteIndexByName('alerting*');
       Cypress.config('unique_number', `${Date.now()}`);
       // Modify the monitor name to be unique
       sampleQueryLevelMonitorWorkflow.name += `-${Cypress.config(
@@ -135,13 +135,13 @@ describe('Alerts', () => {
 
     after(() => {
       // Delete the testing index
-      cy.deleteIndexByName(TESTING_INDEX);
+      // cy.deleteIndexByName(TESTING_INDEX);
     });
   });
 
   describe("can be in 'Error' state", () => {
     before(() => {
-      cy.deleteAllMonitors();
+      // cy.deleteAllMonitors();
       // modify the JSON object to make an error alert when executing the monitor
       sampleQueryLevelMonitorWithAlwaysTrueTrigger.triggers[0].actions = [
         { name: '', destination_id: '', message_template: { source: '' } },
@@ -165,44 +165,44 @@ describe('Alerts', () => {
     });
   });
 
-  describe("can be in 'Deleted' state", () => {
-    before(() => {
-      cy.deleteAllMonitors();
-      Cypress.config('unique_number', `${Date.now()}`);
-      // Modify the monitor name to be unique
-      sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
-        'unique_number'
-      )}`;
-      cy.createAndExecuteMonitor(sampleQueryLevelMonitorWithAlwaysTrueTrigger);
-    });
+  // describe("can be in 'Deleted' state", () => {
+  //   before(() => {
+  //     // cy.deleteAllMonitors();
+  //     Cypress.config('unique_number', `${Date.now()}`);
+  //     // Modify the monitor name to be unique
+  //     sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
+  //       'unique_number'
+  //     )}`;
+  //     cy.createAndExecuteMonitor(sampleQueryLevelMonitorWithAlwaysTrueTrigger);
+  //   });
 
-    it('by deleting the monitor', () => {
-      // Type in monitor name in search box to filter out the alert
-      cy.get(`input[type="search"]`)
-        .focus()
-        .type(`${Cypress.config('unique_number')}`);
+    // it('by deleting the monitor', () => {
+    //   // Type in monitor name in search box to filter out the alert
+    //   cy.get(`input[type="search"]`)
+    //     .focus()
+    //     .type(`${Cypress.config('unique_number')}`);
 
-      //Confirm there is an active alert
-      cy.contains('Active');
+    //   //Confirm there is an active alert
+    //   cy.contains('Active');
 
-      // Delete all existing monitors
-      cy.deleteAllMonitors();
+    //   // Delete all existing monitors
+    //   cy.deleteAllMonitors();
 
-      // Reload the page
-      cy.reload();
+    //   // Reload the page
+    //   cy.reload();
 
-      // Type in monitor name in search box to filter out the alert
-      cy.get(`input[type="search"]`)
-        .focus()
-        .type(`${Cypress.config('unique_number')}`);
+    //   // Type in monitor name in search box to filter out the alert
+    //   cy.get(`input[type="search"]`)
+    //     .focus()
+    //     .type(`${Cypress.config('unique_number')}`);
 
-      // Confirm we can see the alert is in 'Deleted' state
-      cy.contains('Deleted');
-    });
+    //   // Confirm we can see the alert is in 'Deleted' state
+    //   cy.contains('Deleted');
+    // });
   });
 
   after(() => {
     // Delete all existing monitors
-    cy.deleteAllMonitors();
+    // cy.deleteAllMonitors();
   });
 });

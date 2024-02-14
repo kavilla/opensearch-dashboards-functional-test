@@ -20,8 +20,8 @@ const TWENTY_SECONDS = 20000;
 
 describe('AcknowledgeAlertsModal', () => {
   before(() => {
-    // Delete any existing monitors
-    cy.deleteAllMonitors();
+    // // Delete any existing monitors
+   // cy.deleteAllMonitors();
 
     // Load sample data
     cy.loadSampleEcommerceData();
@@ -214,10 +214,10 @@ describe('AcknowledgeAlertsModal', () => {
   });
 
   after(() => {
-    // Delete all monitors
-    cy.deleteAllMonitors();
+    // // Delete all monitors
+    // cy.deleteAllMonitors();
 
-    // Delete sample data
-    cy.deleteIndexByName(`${ALERTING_INDEX.SAMPLE_DATA_ECOMMERCE}`);
+    // // Delete sample data
+    // cy.deleteIndexByName(`${ALERTING_INDEX.SAMPLE_DATA_ECOMMERCE}`);
   });
 });
