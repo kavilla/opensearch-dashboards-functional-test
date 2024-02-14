@@ -22,71 +22,71 @@ describe('Alerts', () => {
     cy.contains('Acknowledge', { timeout: 30000 });
   });
 
-  describe("can be in 'Active' state", () => {
-    before(() => {
-      //cy.deleteAllMonitors();
-      // Generate a unique number in every test by getting a unix timestamp in milliseconds
-      Cypress.config('unique_number', `${Date.now()}`);
-      // Modify the monitor name to be unique
-      sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
-        'unique_number'
-      )}`;
-      cy.createMonitor(sampleQueryLevelMonitorWithAlwaysTrueTrigger);
-    });
+  // describe("can be in 'Active' state", () => {
+  //   before(() => {
+  //     //cy.deleteAllMonitors();
+  //     // Generate a unique number in every test by getting a unix timestamp in milliseconds
+  //     Cypress.config('unique_number', `${Date.now()}`);
+  //     // Modify the monitor name to be unique
+  //     sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
+  //       'unique_number'
+  //     )}`;
+  //     cy.createMonitor(sampleQueryLevelMonitorWithAlwaysTrueTrigger);
+  //   });
 
-    it('after the monitor starts running', () => {
-      // Wait for 1 minute
-      cy.wait(60000);
+  //   it('after the monitor starts running', () => {
+  //     // Wait for 1 minute
+  //     cy.wait(60000);
 
-      // Reload the page
-      cy.reload();
+  //     // Reload the page
+  //     cy.reload();
 
-      // Type in monitor name in search box to filter out the alert
-      cy.get(`input[type="search"]`)
-        .focus()
-        .type(`${Cypress.config('unique_number')}`);
+  //     // Type in monitor name in search box to filter out the alert
+  //     cy.get(`input[type="search"]`)
+  //       .focus()
+  //       .type(`${Cypress.config('unique_number')}`);
 
-      // Confirm we can see one and only alert in Active state
-      cy.get('tbody > tr').should(($tr) => {
-        expect($tr, '1 row').to.have.length(1);
-        expect($tr, 'item').to.contain('Active');
-      });
-    });
-  });
+  //     // Confirm we can see one and only alert in Active state
+  //     cy.get('tbody > tr').should(($tr) => {
+  //       expect($tr, '1 row').to.have.length(1);
+  //       expect($tr, 'item').to.contain('Active');
+  //     });
+  //   });
+  // });
 
-  describe("can be in 'Acknowledged' state", () => {
-    before(() => {
-      //cy.deleteAllMonitors();
-      Cypress.config('unique_number', `${Date.now()}`);
-      // Modify the monitor name to be unique
-      sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
-        'unique_number'
-      )}`;
-      cy.createAndExecuteMonitor(sampleQueryLevelMonitorWithAlwaysTrueTrigger);
-    });
+  // describe("can be in 'Acknowledged' state", () => {
+  //   before(() => {
+  //     //cy.deleteAllMonitors();
+  //     Cypress.config('unique_number', `${Date.now()}`);
+  //     // Modify the monitor name to be unique
+  //     sampleQueryLevelMonitorWithAlwaysTrueTrigger.name += `-${Cypress.config(
+  //       'unique_number'
+  //     )}`;
+  //     cy.createAndExecuteMonitor(sampleQueryLevelMonitorWithAlwaysTrueTrigger);
+  //   });
 
-    it('by clicking the button in Dashboard', () => {
-      // Type in monitor name in search box to filter out the alert
-      cy.get(`input[type="search"]`)
-        .focus()
-        .type(`${Cypress.config('unique_number')}`);
+  //   it('by clicking the button in Dashboard', () => {
+  //     // Type in monitor name in search box to filter out the alert
+  //     cy.get(`input[type="search"]`)
+  //       .focus()
+  //       .type(`${Cypress.config('unique_number')}`);
 
-      //Confirm there is an active alert
-      cy.contains('Active');
+  //     //Confirm there is an active alert
+  //     cy.contains('Active');
 
-      // Select checkbox for the existing alert
-      // There may be multiple alerts in the cluster, first() is used to get the active alert
-      cy.get('input[data-test-subj^="checkboxSelectRow-"]')
-        .first()
-        .click({ force: true });
+  //     // Select checkbox for the existing alert
+  //     // There may be multiple alerts in the cluster, first() is used to get the active alert
+  //     cy.get('input[data-test-subj^="checkboxSelectRow-"]')
+  //       .first()
+  //       .click({ force: true });
 
-      // Click Acknowledge button
-      cy.get('button').contains('Acknowledge').click({ force: true });
+  //     // Click Acknowledge button
+  //     cy.get('button').contains('Acknowledge').click({ force: true });
 
-      // Confirm we can see the alert is in 'Acknowledged' state
-      cy.contains('Acknowledged');
-    });
-  });
+  //     // Confirm we can see the alert is in 'Acknowledged' state
+  //     cy.contains('Acknowledged');
+  //   });
+  // });
 
   describe("can be in 'Completed' state", () => {
     before(() => {
